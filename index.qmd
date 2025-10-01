@@ -1,7 +1,22 @@
 ---
 
 ---
-title: "SRKads1998.github.io"
+title: "Stephy Kads"
+
+image: Stephan_headshot.jpg
+about: 
+  template: jolla
+  image-shape: round
+  image-height: 18em
+  links:
+    - text: LinkedIn
+      href: www.linkedin.com/in/stephan-kadonoff-a5b1ba162
+      target: _blank
+    - text: GitHub
+      href: https://github.com/SRKads1998
+      target: _blank
 ---
 
-What's up, fam? How you doin? The fam good? I'm stephan btw
+Stephan Kadonoff completed is undergraduate studies at UC Santa Barbara, where he graduated with a BA in Political Science, and a minor in Spatial Studies in 2021. After graduating, Stephan began his professional career working in environmental consulting, serving various clients in the waste and recycling industry. He specialized in Geographic Information Systems (GIS) data analysis, recycling program implementation, public education, and more. Afterward he transitioned into a role at a start-up in the aerospace industry. There, he served on a dynamic operations team, executing round the clock missions, capturing radar-based remote sensing images 24 hours a day, 365 days a year.\
+\
+Currently, Stephan is now pursuing a Masters of Environmental Data Science at UCSB’s Bren School. There he aims to broaden his skillset to include technical skills, while leveraging his broad experience working with the public and private sectors, with the goal of working to combat wildfires and other climate change based extreme weather events.
