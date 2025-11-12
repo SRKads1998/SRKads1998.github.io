@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Stephan Kadonoff",
+    "title": "Stephy Kads",
     "section": "",
-    "text": "title: “Stephy Kads”\nimage: Stephan_headshot.jpg about: template: jolla image-shape: round image-height: 18em links: - text: LinkedIn href: www.linkedin.com/in/stephan-kadonoff-a5b1ba162 target: _blank - text: GitHub href: https://github.com/SRKads1998 target: _blank\n\nStephan Kadonoff completed is undergraduate studies at UC Santa Barbara, where he graduated with a BA in Political Science, and a minor in Spatial Studies in 2021. After graduating, Stephan began his professional career working in environmental consulting, serving various clients in the waste and recycling industry. He specialized in Geographic Information Systems (GIS) data analysis, recycling program implementation, public education, and more. Afterward he transitioned into a role at a start-up in the aerospace industry. There, he served on a dynamic operations team, executing round the clock missions, capturing radar-based remote sensing images 24 hours a day, 365 days a year.\n\nCurrently, Stephan is now pursuing a Masters of Environmental Data Science at UCSB’s Bren School. There he aims to broaden his skillset to include technical skills, while leveraging his broad experience working with the public and private sectors, with the goal of working to combat wildfires and other climate change based extreme weather events."
+    "text": "Stephan Kadonoff completed is undergraduate studies at UC Santa Barbara, where he graduated with a BA in Political Science, and a minor in Spatial Studies in 2021. After graduating, Stephan began his professional career working in environmental consulting, serving various clients in the waste and recycling industry. He specialized in Geographic Information Systems (GIS) data analysis, recycling program implementation, public education, and more. Afterward he transitioned into a role at a start-up in the aerospace industry. There, he served on a dynamic operations team, executing round the clock missions, capturing radar-based remote sensing images 24 hours a day, 365 days a year.\n\nCurrently, Stephan is now pursuing a Masters of Environmental Data Science at UCSB’s Bren School. There he aims to broaden his skillset to include technical skills, while leveraging his broad experience working with the public and private sectors, with the goal of working to combat wildfires and other climate change based extreme weather events."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,19 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/my-first-blog-post/index.html",
+    "href": "posts/my-first-blog-post/index.html",
+    "title": "Stephan Kadonoff",
+    "section": "",
+    "text": "title: “My blog” description: “teach me how to dougie” author: - name: “Stephan Kadonoff” url: “https://SRKads1998.github.io/” affiliation: “THE Bren School” affiliation-url: “https://bren.ucsb.edu/”\nThsi is where the body of my blog post begins! I’m going to add a footnote here [^1] Here’s an inline footnote1\n[^1]"
+  },
+  {
+    "objectID": "posts/my-first-blog-post/index.html#footnotes",
+    "href": "posts/my-first-blog-post/index.html#footnotes",
+    "title": "Stephan Kadonoff",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhere’s my inline note↩︎"
   }
 ]

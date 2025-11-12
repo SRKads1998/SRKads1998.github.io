@@ -1,0 +1,12 @@
+---
+title: "index"
+description: "teach me how to dougie"
+author: 
+  - name: "Stephan Kadonoff"
+    url: "https://SRKads1998.github.io/"
+    affiliation: "THE Bren School"
+    affiliation-url: "https://bren.ucsb.edu/"
+---
+
+heres how to cite here
+[@shanny-csik2022]

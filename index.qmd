@@ -1,15 +1,13 @@
 ---
-
----
 title: "Stephy Kads"
-
 image: Stephan_headshot.jpg
 about: 
   template: jolla
   image-shape: round
-  image-height: 18em
+  image-width: 18em
   links:
     - text: LinkedIn
+      icon: linkedin
       href: www.linkedin.com/in/stephan-kadonoff-a5b1ba162
       target: _blank
     - text: GitHub
