@@ -16,15 +16,29 @@
   {
     "objectID": "posts/my-first-blog-post/index.html",
     "href": "posts/my-first-blog-post/index.html",
-    "title": "Stephan Kadonoff",
+    "title": "My blog",
     "section": "",
-    "text": "title: “My blog” description: “teach me how to dougie” author: - name: “Stephan Kadonoff” url: “https://SRKads1998.github.io/” affiliation: “THE Bren School” affiliation-url: “https://bren.ucsb.edu/”\nThsi is where the body of my blog post begins! I’m going to add a footnote here [^1] Here’s an inline footnote1\n[^1]"
+    "text": "This is where the body of my blog post begins!\nI’m going to add a footnote here 1.\nHere’s an inline footnote 2."
   },
   {
     "objectID": "posts/my-first-blog-post/index.html#footnotes",
     "href": "posts/my-first-blog-post/index.html#footnotes",
-    "title": "Stephan Kadonoff",
+    "title": "My blog",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nhere’s my inline note↩︎"
+    "text": "Footnotes\n\n\nFootnote number one.↩︎\nhere’s my inline note↩︎"
+  },
+  {
+    "objectID": "newindex.html",
+    "href": "newindex.html",
+    "title": "index",
+    "section": "",
+    "text": "heres how to cite here [@shanny-csik2022]"
+  },
+  {
+    "objectID": "posts/testblog.html",
+    "href": "posts/testblog.html",
+    "title": "index",
+    "section": "",
+    "text": "This is a test post."
   }
 ]

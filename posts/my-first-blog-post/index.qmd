@@ -1,5 +1,4 @@
 ---
-
 title: "My blog"
 description: "teach me how to dougie"
 author: 
@@ -7,11 +6,12 @@ author:
     url: "https://SRKads1998.github.io/"
     affiliation: "THE Bren School"
     affiliation-url: "https://bren.ucsb.edu/"
-    
-    
 ---
 
-Thsi is where the body of my blog post begins! I'm going to add a footnote here [^1]
-Here's an inline footnote^[here's my inline note]
+This is where the body of my blog post begins!  
+I'm going to add a footnote here [^1].  
+Here's an inline footnote [^index-1].
 
-[^1] 
+[^index-1]: here's my inline note  
+[^1]: Footnote number one.
+
