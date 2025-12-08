@@ -1,0 +1,169 @@
+---
+title: "Exploratory Final Proj Work"
+author: "Stephan Kadonoff"
+format: html
+editor: visual
+execute:
+  echo: true
+  message: false
+  warning: false
+  engine: knitr
+---
+
+The Price of Pollution: Analyzing the Efficacy of the United Kingdom's Carbon Pricing System
+
+## Introduction
+
+Due to climate change, having a system in which we can properly and internally price in the cost of carbon emissions is important not only for preserving the environment, but also to ensure that cost of said pollution is not left as an externalized burden.
+
+The United Kingdom instituted a carbon pricing system in 2013 which set an initial rate of 4.94 British pounds per tonne of CO2 equivalent. While relatively low, the price floor was to serve as the first stage in a progressive system to encourage the transition away from the most polluting energy sources.
+
+To understand the efficacy of this carbon pricing scheme, we will be utilizing a segmented statistical model as an interrupted time series analysis. We will see if there was a change between the post intervention slope at 2013 when the policy was implemented, and the slope before it.
+
+#### Hypothesis
+
+Carbon pricing changed the rate of carbon emission decrease per year faster than without. H0: Slope(s) before and after each breakpoint are equal H1: Slope(s) before and after each breakpoint are not equal
+
+$$    
+\begin{align}
+Carbon Emissions: H0 : B1 = 0 \\
+                  H1 : B2 < 0 \\  
+\end{align}                  
+$$\
+statistical model notation:
+
+\$\$ Yt = \beta\*{0} +\* \beta{1},\text{Year} + \beta\*{2},\*\text{(t - ψ1)} + \beta{3},\text{(t - ψ2)}
+
+\$\$ Y(Carbon Emissions) = B0 + B1(Year) + B2() + B3(Post_Pricing)
+
+A segmented model is one characterized by a distinct change in slope or "breakpoint" where-in the model's line shifts to a new slope value. B0 is, of course, the intercept, B1 is the initial slope of the model along the initial segment of the model. B2 is the point at which the effect is applied to the model's population, causing the change in slope, with B3 itself showing the new slope after the intervention.
+
+In the context of this study looking at the UK's carbon pricing model, we say that Y is Carbon Emissions, B1 is the slope of emissions over years, B2 is the change in slope at the first breakpoint when pricing is applied, and B3 is the change at the second breakpoint. The model should, assuming proper fit, produce a single line with 3 distinct slopes.
+
+#### DAG
+
+![Dag](projdag.png) This dag is a brief overlook at the relationship between the factors which ultimately produce carbon emissions. For the sake of our model, we are only evaluating the change in year as they relate to the two major expected breakpoints along the segmented model, and as these then factor into the total output of carbon emissions.
+
+## Exploratory Work
+
+To begin with, we will add the necessary libraries for this analysis, and then read in the data.
+
+```{r}
+library(tidyverse)
+library(here)
+library(segmented)
+```
+
+```{r}
+# read in emission data
+emission_data <- read_csv(here("posts", "222Blog", "data", "GCB2025v15_MtCO2_flat.csv"))
+uk_emission_data <- emission_data %>%
+  filter(Country == "United Kingdom")%>%
+  rename(per_capita = 'Per Capita')
+```
+
+Now that we have the data read in, we can begin cleaning and filtering the data for the specific time series we want to evaluate for this study. According to the data, total carbon emissions, as well as per capita emissions, peaked in 1971, so let's filter to just before that to 1960.
+
+```{r}
+# filter to near peak yearly carbon emissions
+uk_emission_scope <- uk_emission_data %>%
+  filter(Year >= 1960)
+
+exploratory_plot <- ggplot(uk_emission_scope, aes(x = Year,
+                           y = Total)) +
+  geom_line() +
+  geom_vline(xintercept = 2013,
+             color = "red",
+             linetype = "dashed") +
+  theme_minimal() +
+  labs(title = "UK Carbon Emissions by Year",
+       x = "Year",
+       y = "Carbon Emissions in Metric Tons")
+exploratory_plot
+```
+
+With this exploratory plot, we can already see a couple distinct trends emerging. There is a rise and then peak in the early 1970s, a noticeable drop in the second half of that decade and for the first half of the 1980s, but then a rise again throughout the 1990s and start of the new millennium. Then, as we approach the year 2010, we see a couple steep drops in total emissions. The vertical line is at 2013, the year the government began their carbon pricing scheme.
+
+To understand if this decrease in emissions year over year after the carbon pricing scheme was instituted was steeper than the decrease that is observed before it, we will utilize a segmented model via an interrupted time series analysis of the UK's carbon emissions.
+
+To begin with, we will need to do some data wrangling to set-up our data set for modeling.
+
+```{r}
+# mutate emissions variable to format for a Segmented Model 
+uk_emission_scope <- uk_emission_scope %>%
+  mutate(time = Year - min(Year),
+         pricing = if_else(Year >= 2013, 1, 0),
+         post_pricing = case_when(pricing == 1 ~ row_number() - 54, TRUE~0))
+
+
+```
+
+Next we will have to create a linear model which we will then use as the basis for the breakpoint/segmented model. Based on the earlier exploratory plot, we can see that there is a drop in carbon emissions starting in the early 2000s. For that reason, we will add a breakpoint at the Year 2002, so that we can better understand if the change in slope we expect to see after 2013 was already appearing in the decade before.
+
+```{r}
+# create a linear model of the relationship between emissions and year
+lm_emission_model <- lm(Total ~ Year, data = uk_emission_scope)
+
+# create a segmented model based on the linear model
+seg_emission_model <- segmented(lm_emission_model,
+                                seg.Z = ~Year,
+                                psi = list(Year = c(2002, 2013)))
+```
+
+We now have our segmented model. The model is already telling us something different then we had initially expected. While we had initially coded in breakpoints at 2002 and 2013, the segmented() function overrode the command and found better breakpoints at 1969, and 2006. Since the model is now placing a breakpoint before the intervention year, we can begin to assume that there in fact is *not* a significant change in carbon emission reduction after the policy intervention.
+
+Lets find the confidence interval(s) of the model.
+
+```{r}
+# Find the CI
+confint(seg_emission_model)
+```
+
+Now, lets try to evaluate the model's fit by simulating data, according to the model's assumptions. We will replicate the year range, so 1960 to 2024, and take the coefficients from our segmented model. Lastly, we will also take the breakpoints from our model, rounded down to their closest years 1969 and 2006.
+
+```{r}
+# set the seed for consistency
+set.seed(42)
+
+# replicate the year range from our data
+simulated_years <- seq(1960, 2024)
+
+# take the coefficient values from the segmented model
+b0 <- coef(seg_emission_model)[1]
+b1 <- coef(seg_emission_model)[2]
+b2 <- coef(seg_emission_model)[3]
+b3 <- coef(seg_emission_model)[4]
+
+# breakpoint years
+break_1 <- 1969
+break_2 <- 2006
+# simulate pop
+
+# simulate the emissions across the year range
+simulated_emissions <- b0 + b1 * simulated_years + 
+  b2 * pmax(0, simulated_years - break_1) +
+  b3 * pmax(0, simulated_years - break_2)
+
+# since the above simulated emissions is all consistent values along line, add rnorm with a standard deviation equivalent to the original segmented model's standard error
+
+simulated_emissions <- simulated_emissions + rnorm(length(simulated_emissions), sd = 22)
+  
+
+# create a tibble of simulated data, joining the simulated years and simulated emissions
+simulated_data <- tibble(year = simulated_years,
+                         total = simulated_emissions)
+
+```
+
+Now that we have a simulated data set, lets see if we can replicate the results from our original segmented model.
+
+```{r}
+# created a simulated lm model
+simulated_lm_model <- lm(total ~ year, data = simulated_data)
+
+
+```
+
+```{r}
+
+```

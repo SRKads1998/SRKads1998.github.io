@@ -8,5 +8,4 @@ author:
     affiliation-url: "https://bren.ucsb.edu/"
 ---
 
-heres how to cite here
-[@shanny-csik2022]
+heres how to cite here [@shanny-csik2022]
